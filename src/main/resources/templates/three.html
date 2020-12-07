@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Disco Ball</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+<div id="container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script type="module">
+    import * as THREE from '/js/three/build/three.module.js';
+    import * as THREE2 from '/js/three/examples/jsm/controls/OrbitControls.js';
+
+    var scene, camera, controls, sphere, sun, textureCube, loader, stars, light, light1, light2, light3, light4, light5, light6, light7, cubeCamera, renderer;
+
+    var numLights = 40;
+    var lights = [];
+    var transparentObjects = [];
+
+    init();
+    drawLights();
+    draw();
+    initRoom();
+    animate();
+
+    function init() {
+        //set up scene
+        scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, .0007);
+
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
+
+        renderer.setSize(width, height);
+        renderer.setClearColor(0x000011, 1);
+        renderer.domElement.id = "context";
+
+        var container = document.getElementById( 'container' );
+        container.appendChild( renderer.domElement );
+
+        //set up camera
+        camera = new THREE.PerspectiveCamera(100, width / height, .1, 10000);
+        scene.add(camera);
+        camera.position.set(0, 0, 150);
+        camera.lookAt(scene.position);
+
+        //set up cube camera
+        cubeCamera = new THREE.CubeCamera(1, 100000, 1024);
+        scene.add(cubeCamera);
+
+
+        //add orbital controls
+        // controls = new THREE2.OrbitControls(camera, renderer.domElement);
+    }
+
+    function drawLights() {
+        //set up fill lights
+        var ambientLight = new THREE.AmbientLight(0x555555);
+        scene.add(ambientLight);
+
+        //set up color lights
+
+        var intensity = 1;
+        var distance = 100;
+        var decay = 2.0;
+
+        var c = new THREE.Vector3();
+        var dot = new THREE.SphereGeometry(2, 1, 1);
+
+        for ( var i = 0; i < numLights; i ++ ) {
+
+            var light = new THREE.PointLight( 0xffffff, intensity, distance, decay );
+            c.set( Math.random(), Math.random(), Math.random() ).normalize();
+            light.color.setRGB( c.x, c.y, c.z );
+            scene.add( light );
+            lights.push( light );
+
+            var material = new THREE.MeshBasicMaterial( { color: light.color } );
+            var emitter = new THREE.Mesh( dot, material );
+            light.add( emitter );
+
+        }
+    }
+
+    function draw() {
+        //draw disco ball
+        var geo = new THREE.SphereGeometry(50, 30, 20);
+        var mat = new THREE.MeshPhongMaterial({
+            emissive: '#222',
+            shininess: 50,
+            reflectivity: 3.5,
+            shading: THREE.FlatShading,
+            specular: 'white',
+            color: 'gray',
+            side: THREE.DoubleSide,
+            envMap: cubeCamera.renderTarget.texture,
+            combine: THREE.AddOperation
+        });
+        sphere = new THREE.Mesh(geo, mat);
+        sphere.position.y = 150;
+        sphere.position.z = -100;
+        scene.add(sphere);
+    }
+
+    function initRoom() {
+
+        var size = 300;
+        var geometry = new THREE.PlaneBufferGeometry( size, size );
+        var material = new THREE.MeshPhongMaterial( { color: 0x222222, specular: 0x222222, shininess: 75 } );
+        var transparentMaterial = new THREE.MeshPhongMaterial( { color: 0x222222, emissive: 0x88888888, specular: 0x222222, shininess: 75, opacity: 0.3, transparent: true } );
+
+        var room = new THREE.Object3D();
+        room.position.y = size / 2 - 30;
+
+        // top
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.rotation.x = Math.PI / 2;
+        mesh.position.y = size / 2;
+        room.add( mesh );
+
+        // bottom
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.rotation.x = - Math.PI / 2;
+        mesh.position.y = - size / 2;
+        room.add( mesh );
+
+        // left
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.position.x = - size / 2;
+        mesh.rotation.y = Math.PI / 2;
+        room.add( mesh );
+
+        // right
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.position.x = size / 2;
+        mesh.rotation.y = - Math.PI / 2;
+        room.add( mesh );
+
+        // back
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.position.z = - size / 2;
+        room.add( mesh );
+
+        // front, to check if transparency works
+        mesh = new THREE.Mesh( geometry, transparentMaterial );
+        mesh.position.z = size / 2;
+        mesh.scale.multiplyScalar( 0.33 );
+        mesh.visible = false;
+        transparentObjects.push( mesh );
+        room.add( mesh );
+
+        // back2, to check if transparency works
+        mesh = new THREE.Mesh( geometry, transparentMaterial );
+        mesh.position.z = - size / 4;
+        mesh.scale.multiplyScalar( 0.75 );
+        mesh.visible = false;
+        transparentObjects.push( mesh );
+        room.add( mesh );
+
+        scene.add( room );
+
+    }
+
+    function animate() {
+
+        //animation
+        requestAnimationFrame(animate);
+        sphere.rotation.y += 0.005;
+
+        //move color lights
+        var time = Date.now() * 0.001;
+        var d = 150;
+
+        for ( var i = 0, il = lights.length; i < il; i ++ ) {
+
+            var light = lights[ i ];
+            var x = Math.sin( time + i * 7.0 ) * d;
+            var y = Math.cos( time + i * 5.0 ) * d + 100;
+            var z = Math.cos( time + i * 3.0 ) * d;
+            light.position.set( x, y, z );
+        }
+
+        renderer.render(scene, camera);
+    }
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="UTF-8">
+    <title>Bowling</title>
+
+    <link rel="stylesheet" href="../static/css/bowling.css" th:href="@{/css/bowling.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<h1 class="bowling-title">Bowling Game Score Board</h1>
+<div class="bowling-input-container">
+    <label for="bowling-current-score">Please Enter Current Round Score: </label>
+    <input class="bowling-input" id="bowling-current-score" type="text">
+    <div>X or 10 for Strike, / for Spare, - or 0 for Miss</div>
+    <div class="bowling-input-buttons">
+        <button onclick="submit()">Submit</button>
+        <button onclick="restart()">Restart</button>
+    </div>
+</div>
+
+<div id="in-time-score" class="bowling-score">Current Score: 0</div>
+<table class="bowling-table">
+    <tr id="frame">
+        <th>Frame:</th>
+        <td colspan="2">1</td>
+        <td colspan="2">2</td>
+        <td colspan="2">3</td>
+        <td colspan="2">4</td>
+        <td colspan="2">5</td>
+        <td colspan="2">6</td>
+        <td colspan="2">7</td>
+        <td colspan="2">8</td>
+        <td colspan="2">9</td>
+        <td colspan="3">10</td>
+    </tr>
+    <tr id="hits">
+        <th>Hit:</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr id="frame-scores">
+        <th>Score:</th>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="3"></td>
+    </tr>
+</table>
+</body>
+<script src="/js/bowling.js"></script>
+</html>

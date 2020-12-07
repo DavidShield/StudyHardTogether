@@ -1,0 +1,52 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+body::before {
+    content: "";
+    background: url("../image/bowling.jpg") no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.75;
+    z-index: -1;
+}
+
+.bowling-title {
+    text-align: center;
+}
+
+.bowling-input-container {
+    text-align: center;
+}
+
+.bowling-input {
+    margin-bottom: 5px;
+}
+
+.bowling-input-buttons {
+    padding: 20px;
+}
+
+.bowling-input-buttons button {
+    padding: 5px;
+}
+
+.bowling-score {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.bowling-table {
+    width: 100%;
+    table-layout: fixed;
+}

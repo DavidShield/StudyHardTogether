@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yiqihualong</title>
+    <link rel="stylesheet" type="text/css" href="vendors/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="vendors/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="vendors/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/queries.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div id="loading-wrapper">
+    <div id="loading">&nbsp;</div>
+    <div id="loader"></div>
+</div>
+<header>
+    <nav>
+        <div class="row">
+            <ul class="main-nav js--main-nav">
+                <li><a href="#tops">Tops</a></li>
+                <li><a href="#works">My works</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="/three">Three JS</a></li>
+                <li><a href="/bowling">Bowling Game</a></li>
+            </ul>
+            <a class="mobile-nav-icon js--nav-icon"><span class="iconify"
+                                                          data-icon="ant-design:unordered-list-outlined" data-inline="false"></span></a>
+        </div>
+    </nav>
+    <div class="hero-text-box">
+        <h1>Welcome To David Wang's Website.</h1>
+        <h3 class="hero">This website is created for practicing the most amazing technology currently.</h3>
+    </div>
+
+</header>
+
+<!-- <img id="img" src="hand.jpg"/>  -->
+<section class="js--section-features" id="tops">
+    <div class="row">
+        <h2>
+            Tops &mdash; This section is designed to draw a dragon by tracking hand movement.
+        </h2>
+    </div>
+    <div class="row">
+        <h3>How it works &mdash; Simple</h3>
+    </div>
+    <div class="row">
+        <div class="col span-1-of-2 steps-box">
+            <img src="image/steps.png" alt="how it works" class="app-screen js--wp-2">
+        </div>
+        <div class="col span-1-of-2 steps-box">
+            <div class="works-step clearfix">
+                <div>1</div>
+                <p>Click the "Load Model" button and wait for it change to "Model Loaded".</p>
+            </div>
+            <div class="works-step clearfix">
+                <div>2</div>
+                <p>Click the toggle button to open your camera.</p>
+            </div>
+            <div class="works-step clearfix">
+                <div>3</div>
+                <p>Shake your hand and enjoy.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row trackview">
+        <div>
+            <button id="updatenote" class="trackbutton">Load Model</button>
+            <button id="trackbutton" class="trackbutton" type="button" disabled>
+                Toggle Video
+            </button>
+        </div>
+        <video class="videobox canvasbox" autoplay="autoplay" id="myvideo" style="display: none;"></video>
+        <canvas id="canvas" class="border canvasbox"></canvas>
+
+        <div style="display:none;">
+            <img id="source" src="image/outline_dragon.png" width="300" height="227">
+        </div>
+    </div>
+</section>
+
+<section class="section-steps works" id="works">
+    <div class="row">
+        <h2>My Works</h2>
+    </div>
+    <div class="row">
+        <h3><a href="/three">Disco Ball</a></h3>
+        <p>Disco ball is drawn by three.js try to replicate the club lights.</p>
+    </div>
+</section>
+
+<section class="section-meals about" id="about">
+    <div class="row">
+        <h2>About Me</h2>
+    </div>
+    <div class="row">
+        <div class="col span-1-of-2">
+            <img class="portfolio" src="image/portfolio.jpeg" alt="portfolio"/>
+
+        </div>
+        <div class="col span-1-of-2">
+            <h3>Hi, I am David Wang</h3>
+            <h3>I am a full-stack working in NYC with passion about creating immersive and interactive experience to improve website.</h3>
+            <h3>I also like making traditional Chinese cuisine and steak.</h3>
+            <div class="about-social-media">
+                <a href="https://github.com/DavidShield/"><span class="iconify"
+                                                                data-icon="ant-design:github-filled" data-inline="false"></span></a>
+                <a href="https://www.linkedin.com/in/dawei-wang-498b80130/"><span class="iconify"
+                                                                                  data-icon="ant-design:linkedin-filled" data-inline="false"></span></a>
+            </div>
+
+        </div>
+    </div>
+    <ul class="meals-showcase clearfix">
+        <li>
+            <figure class="meal-photo">
+                <img src="image/1.jpeg" alt="Mapo Tofu, Spicy Frog Leg, Chicken Gizzard.">
+            </figure>
+        </li>
+        <li>
+            <figure class="meal-photo">
+                <img src="image/2.jpeg" alt="Spicy Hot Pot">
+            </figure>
+        </li>
+        <li>
+            <figure class="meal-photo">
+                <img src="image/3.jpeg" alt="Steak">
+            </figure>
+        </li>
+        <li>
+            <figure class="meal-photo">
+                <img src="image/4.jpeg" alt="Octupus">
+            </figure>
+        </li>
+    </ul>
+</section>
+
+<footer>
+    <div class="row">
+        <div class="col span-1-of-2">
+            <ul class="social-links">
+                <li><a href="https://github.com/DavidShield/"><span class="iconify"
+                                                                    data-icon="ant-design:github-filled" data-inline="false"></span></a></li>
+                <li><a href="https://www.linkedin.com/in/dawei-wang-498b80130/"><span class="iconify"
+                                                                                      data-icon="ant-design:linkedin-filled" data-inline="false"></span></a></li>
+                <ion-icon name="logo-github"></ion-icon>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <p>
+            This webpage was created for fun<br>
+            If I have unintentially violate any copyright. I appologize and please contact me. I will
+            remove it immediately.
+        </p>
+        <p>
+            Build with <span class="iconify" data-icon="emojione:heart-suit" data-inline="false"></span> in the New
+            York City.
+        </p>
+    </div>
+</footer>
+
+<script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>　
+<script src="vendors/js/jquery.waypoints.min.js"></script>
+<script src="vendors/js/handtrack.min.js"> </script>
+<script src="js/index.js"></script>
+<script src="js/script.js"></script>
+</body>
+
+</html>
