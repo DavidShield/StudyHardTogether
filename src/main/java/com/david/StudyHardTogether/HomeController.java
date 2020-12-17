@@ -15,12 +15,17 @@ public class HomeController {
     }
 
     @GetMapping("/three")
-    public String three(String name, Model model) {
+    public String three() {
         return "three";
     }
 
     @GetMapping("/four")
-    public String four(String name, Model model) {
+    public String four() {
         return "four";
+    }
+
+    @GetMapping("/website")
+    public String website() {
+        return "website";
     }
 }
